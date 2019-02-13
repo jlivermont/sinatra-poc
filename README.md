@@ -15,3 +15,17 @@ The default local database engine is sqlite.  DB configuration can be found in `
 ```bash
 $ bundle exec rake db:create
 ```
+
+### Testing
+
+To install dependencies for testing, run:
+
+```bash
+$ bundle install --with=test
+```
+
+To run spec tests, run:
+
+```bash
+$ bundle exec rspec spec --color
+```
