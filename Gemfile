@@ -13,3 +13,7 @@ group :test do
   gem 'rack-test'
   gem 'rspec'
 end
+
+gem "rubocop", "~> 0.64.0"
+
+gem "sinatra-namespace", "~> 1.0"

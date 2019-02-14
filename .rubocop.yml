@@ -1,0 +1,11 @@
+Metrics/LineLength:
+  Max: 100
+
+Metrics/BlockLength:
+  Exclude:
+    - service.rb
+
+AllCops:
+  Exclude:
+    - db/**/*
+    - Gemfile*

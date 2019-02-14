@@ -4,9 +4,25 @@
 
 This is a playground/proof of concept to get a feel for how lightweight apps and services might be built upon Sinatra.
 
-This PoC is the back-end of a simple todo list app.  The backend service allows for CRUD operations on todo lists and entries on those lists.
+This PoC is the back-end of a simple todo list service.  The backend service allows for CRUD operations on todo lists and entries on those lists.
+
+## Running
+
+To run the service:
+
+```bash
+$ ruby service.rb
+```
 
 ## Installation
+
+### Dependencies
+
+To install project dependencies, run:
+
+```bash
+$ bundle install
+```
 
 ### DB
 
@@ -36,4 +52,10 @@ To run spec tests, run:
 
 ```bash
 $ bundle exec rspec spec --color
+```
+
+To run static code analysis, run:
+
+```bash
+$ rubocop
 ```
