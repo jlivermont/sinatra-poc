@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 
-set :database, {adapter: 'sqlite3', database: 'db', encoding: 'unicode', file: 'db.sqlite3'}
+set :database, {adapter: 'sqlite3', database: 'db/db.sqlite3', encoding: 'unicode'}
 
 ### /todos ###
 get '/todos' do

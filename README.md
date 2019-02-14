@@ -10,10 +10,18 @@ This PoC is the back-end of a simple todo list app.  The backend service allows 
 
 ### DB
 
-The default local database engine is sqlite.  DB configuration can be found in `config/databases.yml`.  The ORM is [ActiveRecord](https://github.com/rails/rails/tree/master/activerecord).  Rake is configured and normal rake tasks are supported.  For example, to create a new table for the app, run:
+The default local database engine is sqlite.  DB configuration can be found in `config/databases.yml`.  The ORM is [ActiveRecord](https://github.com/rails/rails/tree/master/activerecord).  Rake is configured and normal rake tasks are supported.
+
+To initialize a new sqlite DB and apply migrations, run:
 
 ```bash
-$ bundle exec rake db:create
+$ bundle exec rake db:create db:migrate
+```
+
+To re-initialize the DB and re-apply all migrations:
+
+```bash
+$ RACK_ENV=development bundle exec rake db:drop db:create db:migrate
 ```
 
 ### Testing
