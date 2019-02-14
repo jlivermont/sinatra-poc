@@ -8,6 +8,11 @@ def all_todos
   Todo.all
 end
 
+def all_entries_for_todo(id)
+  todo = find_todo(id)
+  todo.entries
+end
+
 def find_todo(id)
   Todo.find(id)
 end

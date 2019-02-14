@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sinatra/activerecord'
+require 'sinatra/param'
 require 'sinatra/namespace'
-require 'sinatra/strong-params'
 
 # Pull in all controllers
 Dir.glob('controllers/*.rb').each { |r| require_relative r }
@@ -27,25 +27,31 @@ namespace '/api/v1' do
     all_todos.to_json
   end
 
-  post '/todos', needs: [:description] do
+  post '/todos' do
+    param :description, String, required: true, min_length: 1
     create_todo(params[:description]).to_json
   end
 
   get '/todos/:todo_id' do
+    param :todo_id, Integer, required: true, min: 1
     find_todo(params[:todo_id]).to_json
   end
 
-  patch '/todos/:todo_id', needs: [:description] do
+  patch '/todos/:todo_id' do
+    param :todo_id, Integer, required: true, min: 1
+    param :description, String, required: true, min_length: 1
     update_todo(params[:todo_id], params[:description]).to_json
   end
 
   delete '/todos/:todo_id' do
+    param :todo_id, Integer, required: true, min: 1
     remove_todo(params[:todo_id])
   end
 
   ### /todos/:id/entries
   get '/todos/:todos_id/entries' do
-    'GET /todos/:todos_id/entries'
+    param :todo_id, Integer, required: true, min: 1
+    all_entries_for_todo(params[:todo_id])
   end
 
   post '/todos/:todos_id/entries' do

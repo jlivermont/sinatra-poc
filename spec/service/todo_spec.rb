@@ -10,7 +10,22 @@ RSpec.describe 'The todos resource' do
     expect(body_as_json.keys).to include('created_at')
   end
 
-  it 'should return a client error if the request is missing required parameters (POST /todos)' do
+  where(:url) do
+    [
+      ['/api/v1/todos/abc'],
+      ['/api/v1/todos/-1']
+    ]
+  end
+
+  with_them do
+    it 'should return a client error if the ID is missing or malformed (GET /todos/:id)' do
+      get url
+
+      expect(last_response).to be_a_bad_request
+    end
+  end
+
+  it 'should return a client error if the request has missing required parameters (POST /todos)' do
     post '/api/v1/todos', {}
 
     expect(last_response).to be_a_bad_request
@@ -52,5 +67,24 @@ RSpec.describe 'The todos resource' do
     get '/api/v1/todos/' + todo_id.to_s
     expect(last_response).to be_ok
     expect(body_as_json['description']).to eq('updated description')
+  end
+
+  where(:body) do
+    [
+      [{ 'bad_key': 'this is a test todo' }],
+      [{ 'description': '' }]
+    ]
+  end
+
+  with_them do
+    it 'should return a client error if the body is missing or malformed (PATCH /todos/:id)' do
+      initial_body = { 'description': 'this is a test todo' }
+      post '/api/v1/todos', initial_body
+      todo_id = body_as_json['id']
+
+      patch '/api/v1/todos/' + todo_id.to_s, body
+
+      expect(last_response).to be_a_bad_request
+    end
   end
 end
