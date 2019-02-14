@@ -5,6 +5,7 @@ RSpec.describe 'The Entry model' do
     @todo = Todo.create!(description: 'This is a test todo list')
     @entry = @todo.entries.create(message: 'Pick up milk')
 
+    expect(@entry.todo_id).to eq(@todo.id)
     expect(Entry.exists?(@entry.id)).to be true
   end
 end

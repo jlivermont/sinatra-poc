@@ -1,11 +1,16 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/namespace'
+require 'sinatra/strong-params'
 
 # Pull in all controllers
 Dir.glob('controllers/*.rb').each { |r| require_relative r }
 
 set :database, adapter: 'sqlite3', database: 'db/db.sqlite3', encoding: 'unicode'
+
+before do
+  content_type 'application/json'
+end
 
 get '/heartbeat' do
   'alive'
@@ -17,9 +22,8 @@ namespace '/api/v1' do
     all_todos.to_json
   end
 
-  post '/todos' do
-    description = params[:description]
-    create_todo(description).to_json
+  post '/todos', needs: [:description] do
+    create_todo(params[:description]).to_json
   end
 
   get '/todos/:todo_id' do

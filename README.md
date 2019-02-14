@@ -54,6 +54,12 @@ To run spec tests, run:
 $ bundle exec rspec spec --color
 ```
 
+To run tests and have description of each test executed, run:
+
+```bash
+$ bundle exec rspec spec -f d --color
+```
+
 To run static code analysis, run:
 
 ```bash

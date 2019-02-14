@@ -17,3 +17,5 @@ end
 gem "rubocop", "~> 0.64.0"
 
 gem "sinatra-namespace", "~> 1.0"
+
+gem "sinatra-strong-params", "~> 0.1.0"
