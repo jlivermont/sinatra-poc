@@ -16,6 +16,11 @@ get '/heartbeat' do
   'alive'
 end
 
+error ActiveRecord::RecordNotFound do
+  status 404
+  { result: 'requested resource does not exist' }.to_json
+end
+
 namespace '/api/v1' do
   ### /todos ###
   get '/todos' do
@@ -27,15 +32,15 @@ namespace '/api/v1' do
   end
 
   get '/todos/:todo_id' do
-    'GET /todos/:todo_id'
+    find_todo(params[:todo_id]).to_json
   end
 
-  patch '/todos/:todo_id' do
-    'PATCH /todos/:todo_id'
+  patch '/todos/:todo_id', needs: [:description] do
+    update_todo(params[:todo_id], params[:description]).to_json
   end
 
   delete '/todos/:todo_id' do
-    'DELETE /todos/:todo_id'
+    remove_todo(params[:todo_id])
   end
 
   ### /todos/:id/entries

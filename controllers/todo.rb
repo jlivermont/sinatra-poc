@@ -7,3 +7,18 @@ end
 def all_todos
   Todo.all
 end
+
+def find_todo(id)
+  Todo.find(id)
+end
+
+def update_todo(id, description)
+  todo = find_todo(id)
+  todo.description = description
+  todo.save!
+  todo
+end
+
+def remove_todo(id)
+  Todo.destroy(id)
+end
