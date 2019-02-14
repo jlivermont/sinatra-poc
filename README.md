@@ -11,7 +11,29 @@ This PoC is the back-end of a simple todo list service.  The backend service all
 To run the service:
 
 ```bash
-$ ruby service.rb
+$ RACK_ENV=development ruby service.rb
+```
+
+`RACK_ENV` can also be set to `test` or `production`.
+
+## Routes
+
+### GET /api/v1/todos - Get all todos
+
+```bash
+$ curl -v -X GET  http://{host}/api/v1/todos
+```
+
+### POST /api/v1/todos - Create a new todo
+
+```bash
+$ curl -v -X POST -H 'Content-Type: application/json' -d '{"description":"sample todo list"}' http://{host}/api/v1/todos
+```
+
+### PATCH /api/v1/todos/:id - Update an existing todo
+
+```bash
+$ curl -v -X PATCH -H 'Content-Type: application/json' -d '{"description":"updated description"}' http://{host}/api/v1/todos/{id}
 ```
 
 ## Installation

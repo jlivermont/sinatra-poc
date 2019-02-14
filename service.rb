@@ -28,6 +28,7 @@ namespace '/api/v1' do
   end
 
   post '/todos' do
+    params.merge!(JSON.parse(request.body.read.to_s))
     param :description, String, required: true, min_length: 1
     create_todo(params[:description]).to_json
   end
@@ -38,6 +39,7 @@ namespace '/api/v1' do
   end
 
   patch '/todos/:todo_id' do
+    params.merge!(JSON.parse(request.body.read.to_s))
     param :todo_id, Integer, required: true, min: 1
     param :description, String, required: true, min_length: 1
     update_todo(params[:todo_id], params[:description]).to_json
