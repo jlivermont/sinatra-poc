@@ -11,8 +11,8 @@ gem "sinatra-namespace", "~> 1.0"
 gem "sinatra-param", "~> 1.5"
 
 gem "pg", "~> 1.1"
-gem "sqlite3", "~> 1.3.6"
 gem "rake", "~> 12.3"
+gem "irb", "~> 1.0"
 
 group :test do
   gem 'rack-test'

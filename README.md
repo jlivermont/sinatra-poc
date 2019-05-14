@@ -1,5 +1,10 @@
 # sinatra-poc
 
+[![CircleCI](https://circleci.com/gh/jlivermont/sinatra-poc/tree/master.svg?style=svg)](https://circleci.com/gh/jlivermont/sinatra-poc/tree/master)
+[![](https://images.microbadger.com/badges/image/jlivermont/sinatra-poc.svg)](https://microbadger.com/images/jlivermont/sinatra-poc "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/jlivermont/sinatra-poc.svg)](https://microbadger.com/images/jlivermont/sinatra-poc "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/commit/jlivermont/sinatra-poc.svg)](https://microbadger.com/images/jlivermont/sinatra-poc "Get your own commit badge on microbadger.com")
+
 ## Introduction
 
 This is a playground/proof of concept to get a feel for how lightweight apps and services might be built upon Sinatra.

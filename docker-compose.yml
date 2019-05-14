@@ -14,9 +14,6 @@ services:
     restart: always
     ports:
       - "16379:6379"
-    volumes:
-      - ./redis.conf:/redis.conf
-    command: "redis-server /redis.conf"
   sinatra:
     build: .
     environment:
@@ -32,10 +29,8 @@ services:
     depends_on:
       - postgres
       - redis
-    volumes:
-      - .:/app
     command: >
       sh -c "rm -f /app/tmp/pids/server.pid &&
              sleep 3 &&
              /usr/bin/rake db:create db:migrate &&
-             /usr/bin/rackup /app/config.ru -p 3000"
+             /usr/bin/rackup /app/config.ru -o 0.0.0.0 -p 3000"

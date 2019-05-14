@@ -8,7 +8,7 @@ set :database_file, File.join(File.dirname(__FILE__), '../app/config/database.ym
 #set :raise_errors, false
 
 # Pull in all controller, model and service classes
-Dir.glob('./app/{models,services,controllers}/*.rb').each { |r| require r }
+Dir.glob('./app/{models,services,controllers}/*.rb').sort.each { |r| require r }
 
 class App < Sinatra::Base
   register Sinatra::ActiveRecordExtension
