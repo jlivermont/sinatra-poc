@@ -1,4 +1,4 @@
-FROM jlivermont/docker-base-sinatra:19
+FROM jlivermont/docker-base-sinatra:22
 
 ARG VCS_REF
 

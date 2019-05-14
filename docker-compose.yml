@@ -1,0 +1,41 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:11.2
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=sinatra
+    ports:
+      - "15432:5432"
+  redis:
+    image: redis:5.0.4-alpine
+    restart: always
+    ports:
+      - "16379:6379"
+    volumes:
+      - ./redis.conf:/redis.conf
+    command: "redis-server /redis.conf"
+  sinatra:
+    build: .
+    environment:
+      - RACK_ENV=development
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=sinatra
+      - DATABASE_USER=admin
+      - DATABASE_PASSWORD=admin
+      - DATABASE_POOL_SIZE=5
+    ports:
+      - "13000:3000"
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - .:/app
+    command: >
+      sh -c "rm -f /app/tmp/pids/server.pid &&
+             sleep 3 &&
+             /usr/bin/rake db:create db:migrate &&
+             /usr/bin/rackup /app/config.ru -p 3000"

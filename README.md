@@ -48,12 +48,21 @@ $ bundle install
 
 ### DB
 
-The default local database engine is sqlite.  DB configuration can be found in `config/databases.yml`.  The ORM is [ActiveRecord](https://github.com/rails/rails/tree/master/activerecord).  Rake is configured and normal rake tasks are supported.
+The default local database engine is postgresql, but sqlite is supported as well.  DB configuration can be found in `app/config/databases.yml`.  The ORM is [ActiveRecord](https://github.com/rails/rails/tree/master/activerecord).  Rake is configured and normal rake tasks are supported.
 
-To initialize a new sqlite DB and apply migrations, run:
+To setup Postgres with a database named `postgres` and a user named `postgres`, using Homebrew for Mac:
 
 ```bash
-$ bundle exec rake db:create db:migrate
+$ brew install postgres
+$ brew services start postgresql
+$ initdb -U postgres -W -E utf8 /usr/local/var/postgres
+$ createuser -s -r -W postgres
+```
+
+To initialize a new Postgres DB and apply migrations, run:
+
+```bash
+$ RACK_ENV=development bundle exec rake db:create db:migrate
 ```
 
 To re-initialize the DB and re-apply all migrations:
